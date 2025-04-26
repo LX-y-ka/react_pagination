@@ -1,10 +1,10 @@
-import { getNumbers } from '../../utils';
 import classNames from 'classnames';
 
 type Props = {
   total: number;
   perPage: number;
   currentPage: number;
+  itemsList: string[];
   onPageChange: (value: number) => void;
 };
 
@@ -12,12 +12,10 @@ export const Pagination: React.FC<Props> = ({
   total,
   perPage,
   currentPage,
+  itemsList,
   onPageChange,
 }) => {
   const tabsNumber = Math.ceil(total / perPage);
-  const items = getNumbers(1, total).map((n: number) => `Item ${n}`);
-  const startIndex = perPage * (currentPage - 1);
-  const itemsPerPage = Math.min(perPage, total - startIndex);
 
   return (
     <>
@@ -77,8 +75,10 @@ export const Pagination: React.FC<Props> = ({
         </li>
       </ul>
       <ul>
-        {new Array(itemsPerPage).fill(0).map((_, i) => (
-          <li key={i} data-cy="item">{items[startIndex + i]}</li>
+        {itemsList.map((_, i) => (
+          <li key={i} data-cy="item">
+            {itemsList[i]}
+          </li>
         ))}
       </ul>
     </>

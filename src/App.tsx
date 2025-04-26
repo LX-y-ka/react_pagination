@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
 import './App.css';
-// import { getNumbers } from './utils';
+import { getNumbers } from './utils';
 import { Pagination } from './components/Pagination';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// const items = getNumbers(1, 42).map(n => `Item ${n}`);
 const TOTAL = 42;
+const items = getNumbers(1, TOTAL).map(n => `Item ${n}`);
 
 export const App: React.FC = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -51,6 +51,7 @@ export const App: React.FC = () => {
         total={TOTAL}
         perPage={numberPerPage}
         currentPage={pageNumber}
+        itemsList={items.slice(firstElementIndex - 1, lastElementIndex)}
         onPageChange={setPageNumber}
       />
 
